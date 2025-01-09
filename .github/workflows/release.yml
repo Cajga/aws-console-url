@@ -1,0 +1,37 @@
+name: Go Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Matches semantic version tags like v1.0.0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Go
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.18'  # Use your desired Go version here
+
+      # Step 3: Build the static binary
+      - name: Build static binary
+        run: |
+          GOOS=linux GOARCH=amd64 go build -o aws-console-url -ldflags '-extldflags "-static"' main.go  # Adjust for your main Go file
+
+      # Step 4: Create the release on GitHub and upload the binary
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./aws-console-url  # Path to the built binary
+
+      # Optional: Clean up the binary after release
+      - name: Clean up
+        run: rm ./aws-console-url
