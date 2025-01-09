@@ -12,18 +12,18 @@ jobs:
     steps:
       # Step 1: Checkout the repository
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Step 2: Set up Go
       - name: Set up Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4
         with:
-          go-version: '1.18'  # Use your desired Go version here
+          go-version: '1.20'  # Use your desired Go version here
 
       # Step 3: Build the static binary
       - name: Build static binary
         run: |
-          GOOS=linux GOARCH=amd64 go build -o aws-console-url -ldflags '-extldflags "-static"' main.go  # Adjust for your main Go file
+          GOOS=linux GOARCH=amd64 go build -o aws-console-url -ldflags '-extldflags "-static"' main.go
 
       # Step 4: Create the release on GitHub and upload the binary
       - name: Create Release
