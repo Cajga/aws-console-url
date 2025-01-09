@@ -44,5 +44,6 @@ Parameters:
   The default session duration is managed by the role. If specified, this will be added to the URL request when
   generating the federated sign-in URL.
 
-> **_NOTE:_**: if you are using role-chaining (your role assumes another role) session duration cannot be defined. Also,
-> you should not define longer session duration than the final role allows (max_session_duration property of role).
+> **_NOTE:_**: if you are using role-chaining (you are using a role to assume another role) session duration cannot be
+> defined. Also, you should not define longer session duration than the final role allows (max_session_duration property
+> of role which is 1h per default and can be modified to a maximum value of 12h).
