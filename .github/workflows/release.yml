@@ -28,7 +28,7 @@ jobs:
       # Step 4: Create the release on GitHub and upload the binary
       - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: ./aws-console-url  # Path to the built binary
 
