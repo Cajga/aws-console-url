@@ -1,7 +1,10 @@
 # AWS Management Console URL Generator
-This Go application generates a sign-in URL for accessing the AWS Management Console. It uses AWS Security Token Service
-(STS) to assume a role and then uses the getSigninToken API to create a temporary session that can be used to log in to
-the AWS Console using a browser.
+When you have AWS cli access (IAM Access Key and Secret Key), an IAM role in an AWS account and you want to access the
+AWS Management Console through this role, you can use this tool to generate a URL that will allow you to sign in to the
+Console and have the permissions of the role.
+
+The tool generates a federated sign-in URL using the AWS Security Token Service (STS) to assume a role and then uses the
+getSigninToken API to create a temporary session that can be used to log using a browser.
 
 It is based on the [Enable custom identity broker access to the AWS console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html)
 documentation from AWS.
