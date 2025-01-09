@@ -1,7 +1,7 @@
 # AWS Management Console URL Generator
 This Go application generates a sign-in URL for accessing the AWS Management Console. It uses AWS Security Token Service
 (STS) to assume a role and then uses the getSigninToken API to create a temporary session that can be used to log in to
-the AWS Console.
+the AWS Console using a browser.
 
 It is based on the [Enable custom identity broker access to the AWS console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html)
 documentation from AWS.
@@ -15,13 +15,21 @@ documentation from AWS.
   specify.
 
 # Setup
-Clone the repository or copy the provided Go code into a directory of your choice.
-Run `go mod init <module-name>` and `go mod tidy` to download dependencies if required.
+## Binary
+Download the latest binary from the [releases page](https://github.com/Cajga/aws-console-url/releases)
+
+## From source
+```bash
+git clone git@github.com:Cajga/aws-console-url.git
+cd aws-console-url
+GOOS=linux GOARCH=amd64 go build -o aws-console-url -ldflags '-extldflags "-static"' main.go
+chmod +x aws-console-url
+```
 
 # Usage
 To run the application, use the following command syntax:
 ```bash
-go run main.go --profile <aws-profile> --role-arn <role-arn> [--session-duration <duration>]
+./aws-console-url --profile <aws-profile> --role-arn <role-arn> [--session-duration <duration_in_seconds>]
 ```
 
 Parameters:
@@ -40,4 +48,6 @@ Basic Usage (no session duration specified):
 ```bash
 go run main.go --profile my-aws-profile --role-arn arn:aws:iam::123456789012:role/my-role
 ```
-This will generate a federated sign-in URL using the temporary credentials obtained from assuming the specified role.
+
+This will generate a federated sign-in URL using the temporary token obtained from assuming the specified role. Use the
+URL in a browser to log in to the AWS Management Console.
