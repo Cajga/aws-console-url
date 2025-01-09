@@ -32,6 +32,11 @@ To run the application, use the following command syntax:
 ./aws-console-url --profile <aws-profile> --role-arn <role-arn> [--session-duration <duration_in_seconds>]
 ```
 
+Example:
+```bash
+./aws-console-url --profile my-sso-profile --role-arn arn:aws:iam::123456789012:role/my-role
+```
+
 Parameters:
 * --profile <aws-profile> (Required): The AWS CLI profile to use (e.g., my-sso-profile).
 * --role-arn <role-arn> (Required): The ARN of the IAM role you wish to assume (e.g., arn:aws:iam::123456789012:role/my-role).
@@ -40,14 +45,4 @@ Parameters:
   generating the federated sign-in URL.
 
 > **_NOTE:_**: if you are using role-chaining (your role assumes another role) session duration cannot be defined. Also,
-> you should not define longer session duration than the final role allows (max_session_duration property of role).  
-
-## Example Usage
-Basic Usage (no session duration specified):
-
-```bash
-go run main.go --profile my-aws-profile --role-arn arn:aws:iam::123456789012:role/my-role
-```
-
-This will generate a federated sign-in URL using the temporary token obtained from assuming the specified role. Use the
-URL in a browser to log in to the AWS Management Console.
+> you should not define longer session duration than the final role allows (max_session_duration property of role).
