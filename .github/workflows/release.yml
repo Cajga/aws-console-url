@@ -7,6 +7,8 @@ on:
 
 jobs:
   build:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
 
     steps:
@@ -27,8 +29,6 @@ jobs:
 
       # Step 4: Create the release on GitHub and upload the binary
       - name: Create Release
-        permissions:
-          contents: write
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
